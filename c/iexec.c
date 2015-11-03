@@ -39,7 +39,6 @@ int main(int argc, char *argv[]) {
     printf("Preparing");
   }
   do {
-  do {
       time(&ts);
       if (debug) printf(".");
       msleep(1);
