@@ -2,6 +2,7 @@
 #include<sys/time.h>
 #include<errno.h>
 #include<unistd.h>
+#include<signal.h>
 
 
 void msleep(int m_sec) {
@@ -56,12 +57,17 @@ int main(int argc, char *argv[]) {
               return 1;
       }
   }
+  signal(SIGCHLD, SIG_IGN);
   for (i = 0; i < count; i++) {
       sprintf(buffer, " %d", i+1);
       sprintf(cmd, execute);
       strcat(cmd, buffer);
       //printf("%d. %s\n", i, cmd);
-      system(cmd);
+      //system(cmd);
+      if (fork() == 0) {
+         system(cmd);
+         exit(0);
+      }
       msleep(interval);
   }
   return 0;
