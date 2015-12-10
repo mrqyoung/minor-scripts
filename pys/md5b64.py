@@ -7,9 +7,6 @@ Base64  MD5  UrlEncode  UrlDecode  TimeFormat
 """
 
 
-from urllib.parse import quote_plus, unquote_plus
-
-
 UTF8 = 'utf-8'
 
 
