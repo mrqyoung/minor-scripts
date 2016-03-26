@@ -107,6 +107,7 @@ if __name__ == '__main__':
     while True:
         _in = input('> ')
         if _in == 'q': break
+        if not _in: continue
         cmd = _in.split(' ')
         if len(cmd) < 2:
             print('Bad input, try again. q for exit')
