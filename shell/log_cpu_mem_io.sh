@@ -3,6 +3,12 @@
 end=$((SECONDS+${1:?Need run-seconds at arg1}))
 interval=5
 
+bak_dir=./bak/$(date '+%Y-%m-%d_%H-%M-%S')/
+if ls *.cm >/dev/null 2>&1; then
+  mkdir -p $bak_dir
+  mv *.cm $bak_dir
+fi
+
 echo "Start I/O logging, seconds=$1, interval=$interval"
 iotop -obtqkd $interval -n $(($1/5+2)) >> io.log &
 
