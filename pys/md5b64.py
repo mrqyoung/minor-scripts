@@ -106,6 +106,7 @@ if __name__ == '__main__':
           )
     while True:
         _in = input('> ')
+        if not _in: continue
         if _in == 'q': break
         if not _in: continue
         cmd = _in.split(' ')
