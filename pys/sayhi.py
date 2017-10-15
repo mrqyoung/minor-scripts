@@ -207,7 +207,7 @@ class Messenger(BaseMessenger):
         return
 
     def change_at(self, name):
-        if name in self.chat_list.values():
+         if name in self.chat_list.values():
             self.to = name
             print('--> @' + name)
             return True
@@ -235,7 +235,7 @@ class Messenger(BaseMessenger):
         return self.quiet
 
     def set_autochange(self, auto=True):
-        if self.autochange == bool(auto): return
+        if self.autochange == bool(auto): return auto
         self.autochange = bool(auto)
         print('--> Auto-change:', self.autochange)
         return self.autochange
@@ -258,9 +258,9 @@ class Messenger(BaseMessenger):
         return name.startswith('To')
 
     def start(self):
-        t = threading.Thread(target=self._receive)
-        t.start()
-        #t.join()
+        receiver = threading.Thread(target=self._receive)
+        receiver.start()
+        #receiver.join()
         self.online()
         self.welcome()
         d('starting')
