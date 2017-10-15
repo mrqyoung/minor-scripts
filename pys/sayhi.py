@@ -41,9 +41,9 @@ class Broadcast(BaseMessenger):
 
     def say(self, something):
         self.sock.sendto(something.encode(), self.broadcast_addr)
+        return
 
     def say_hi(self, src):
-        #msg = '@hi:from:{}'.format(src)
         msg = Broadcast.HI + src
         self.say(msg)
         return
@@ -87,7 +87,7 @@ class Messenger(BaseMessenger):
         super().__init__()
         self.sock.bind(self.addr)
         self.ip = '127.0.0.1'
-        self.chat_list = {}  # should be: addr(ip) -> name pair
+        self.chat_list = {}  # should be: addr/ip -> name pair
         self.autochange = False
         self.quiet = False
         self.to = ''
@@ -138,7 +138,7 @@ class Messenger(BaseMessenger):
                     'Use "@{0} " to chat with him/her.\n'
                     'Use ":list" to show online list.\n'
                     'Use ":help" for help at any time.'
-                ).format(self.chat_list[addr], len(self.chat_list)) )
+                    ).format(self.chat_list[addr], len(self.chat_list)) )
         return True
 
     def handle_user_off(self, addr):
@@ -284,10 +284,10 @@ class Messenger(BaseMessenger):
         addr = None
         try:
             addr = list(self.chat_list.keys())[list(self.chat_list.values()).index(name)]
-            self.display(msg, 'To <%s>' % name)
         except:
             self.hint('Can not send to %s. He/She is not online.' % name)
             return False
+        self.display(msg, 'To <%s>' % name)
         return self.say_to(msg, addr)
 
     pass # EOC
